@@ -1,0 +1,60 @@
+<div 
+  class="content-card-wrapper"
+  [class]="getCardClasses()"
+  (click)="onCardClick()"
+  appHoverZoom>
+  
+  <div class="content-card__image-container">
+    <img 
+      [src]="getImageUrl()" 
+      [alt]="content.title"
+      class="content-card__image"
+      appLazyLoad>
+    
+    <!-- Dark overlay for better text visibility -->
+    <div class="content-card__dark-overlay"></div>
+    
+    <!-- Always visible centered label -->
+    <div class="content-card__label" *ngIf="showInfo">
+      <h3 class="content-card__label-text">{{ content.title }}</h3>
+    </div>
+    
+    <!-- Detailed info overlay on hover -->
+    <div class="content-card__overlay" *ngIf="showInfo">
+      <div class="content-card__info">
+        <h3 class="content-card__title">{{ content.title }}</h3>
+        <p class="content-card__description" *ngIf="content.description">
+          {{ content.description | truncate:100 }}
+        </p>
+        <div class="content-card__meta">
+          <span class="content-card__rating" *ngIf="content.rating">
+            <i class="icon-star"></i>
+            {{ content.rating }}
+          </span>
+          <span class="content-card__year" *ngIf="content.year">
+            {{ content.year }}
+          </span>
+          <span class="content-card__duration" *ngIf="content.duration">
+            {{ content.duration }}
+          </span>
+        </div>
+        <div class="content-card__tags" *ngIf="content.tags.length">
+          <span 
+            class="content-card__tag" 
+            *ngFor="let tag of content.tags.slice(0, 3)">
+            {{ tag }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="content-card__badges">
+    <span class="content-card__badge content-card__badge--featured" *ngIf="content.isFeatured">
+      Featured
+    </span>
+    <span class="content-card__badge content-card__badge--new" *ngIf="content.isNew">
+      New
+    </span>
+  </div>
+</div>

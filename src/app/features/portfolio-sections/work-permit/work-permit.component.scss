@@ -1,0 +1,37 @@
+.work-permit-container {
+  min-height: 100vh;
+  background: #141414;
+  color: #ffffff;
+}
+
+.work-permit-main {
+  padding-top: 70px;
+  padding: 70px 4% 40px;
+}
+
+.work-permit-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.work-permit-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  color: #ffffff;
+}
+
+.work-permit-description {
+  font-size: 18px;
+  color: #b3b3b3;
+  margin: 0 0 40px 0;
+  line-height: 1.6;
+}
+
+.work-permit-placeholder {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 40px;
+  border-radius: 8px;
+  text-align: center;
+  color: #b3b3b3;
+}

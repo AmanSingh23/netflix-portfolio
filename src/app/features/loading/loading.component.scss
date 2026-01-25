@@ -1,0 +1,263 @@
+.loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #141414;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.loading-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.loading-background__gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    #141414 0%,
+    #1a1a1a 25%,
+    #141414 50%,
+    #0f0f0f 75%,
+    #141414 100%
+  );
+  animation: backgroundShift 8s ease-in-out infinite;
+}
+
+@keyframes backgroundShift {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.loading-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #ffffff;
+  max-width: 600px;
+  padding: 0 20px;
+}
+
+.loading-brand {
+  margin-bottom: 60px;
+  animation: fadeInUp 1s ease-out;
+}
+
+.loading-brand__title {
+  font-size: 48px;
+  font-weight: 900;
+  color: #e50914;
+  margin: 0 0 8px 0;
+  letter-spacing: -1px;
+  text-shadow: 0 0 20px rgba(229, 9, 20, 0.3);
+  animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+.loading-brand__subtitle {
+  font-size: 18px;
+  color: #b3b3b3;
+  margin: 0;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+@keyframes titleGlow {
+  0% { text-shadow: 0 0 20px rgba(229, 9, 20, 0.3); }
+  100% { text-shadow: 0 0 30px rgba(229, 9, 20, 0.6); }
+}
+
+.loading-animation {
+  margin-bottom: 40px;
+  animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+.loading-spinner {
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.loading-spinner__ring {
+  width: 80px;
+  height: 80px;
+  border: 3px solid rgba(229, 9, 20, 0.2);
+  border-top: 3px solid #e50914;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  position: relative;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-progress {
+  margin-bottom: 30px;
+}
+
+.loading-progress__bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.loading-progress__fill {
+  height: 100%;
+  background: linear-gradient(90deg, #e50914, #f40612);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    animation: shimmer 2s infinite;
+  }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.loading-progress__percentage {
+  font-size: 14px;
+  color: #b3b3b3;
+  font-weight: 500;
+}
+
+.loading-message {
+  animation: fadeInUp 1s ease-out 1s both;
+}
+
+.loading-message__text {
+  font-size: 16px;
+  color: #ffffff;
+  margin: 0;
+  font-weight: 400;
+  min-height: 24px;
+}
+
+.loading-complete {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all .5s ease;
+  
+  &--visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.loading-complete__checkmark {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 20px;
+  color: #00d4aa;
+  animation: checkmarkBounce .6s ease-out;
+}
+
+.loading-complete__checkmark svg {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes checkmarkBounce {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.loading-complete__text {
+  font-size: 18px;
+  color: #00d4aa;
+  margin: 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .loading-brand__title {
+    font-size: 36px;
+  }
+  
+  .loading-brand__subtitle {
+    font-size: 16px;
+  }
+  
+  .loading-spinner__ring {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .loading-spinner__ring-inner {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .loading-complete__checkmark {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .loading-decoration {
+    &--1 {
+      width: 150px;
+      height: 150px;
+    }
+    
+    &--2 {
+      width: 100px;
+      height: 100px;
+    }
+    
+    &--3 {
+      width: 80px;
+      height: 80px;
+    }
+  }
+}

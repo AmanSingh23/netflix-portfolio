@@ -1,0 +1,62 @@
+.certifications-container {
+  min-height: 100vh;
+  background: #141414;
+  color: #ffffff;
+
+  &--compact {
+    min-height: auto;
+  }
+}
+
+.certifications-main {
+  padding-top: 70px;
+  padding: 70px 4% 40px;
+
+  &--compact {
+    padding-top: 20px;
+    padding: 20px 0;
+  }
+}
+
+.certifications-content {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+// Heading
+.certifications-heading {
+  font-size: 42px;
+  font-weight: 700;
+  margin: 0 0 40px 0;
+  color: #ffffff;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+}
+
+// Tab Navigation is now handled by app-tab-navigation component
+
+// Certifications Grid
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+// Certification cards are now handled by app-certification-card component
+
+// Responsive
+@media (max-width: 768px) {
+  .certifications-heading {
+    font-size: 32px;
+  }
+
+  .certifications-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .certifications-tabs {
+    gap: 24px;
+  }
+}

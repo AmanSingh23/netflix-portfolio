@@ -1,0 +1,18 @@
+<div class="skills-container" [class.skills-container--compact]="hideHeader">
+  <app-header *ngIf="!hideHeader"></app-header>
+  <main class="skills-main" [class.skills-main--compact]="hideHeader">
+    <div class="skills-content">
+      <div class="skills-category" *ngFor="let category of skillCategories">
+        <h2 class="skills-category-title" #categoryTitle>{{ category.title }}</h2>
+        <div class="skills-grid">
+          <app-skill-card
+            #skillCard
+            *ngFor="let skill of category.skills"
+            [skill]="skill"
+            [iconInfo]="getIconInfo(skill.name)">
+          </app-skill-card>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

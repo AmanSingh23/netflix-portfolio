@@ -1,0 +1,60 @@
+<div 
+  class="certification-card"
+  [class.certification-card--pursuing]="certification.isPursuing"
+  [attr.aria-label]="certification.title + ' certification'">
+  
+  <!-- Logo and Badges -->
+  <div class="certification-card__header">
+    <div class="certification-card__logo-wrapper">
+      <img 
+        *ngIf="certification.logoName && !certification.isPursuing"
+        [src]="getLogoUrl(certification.logoName)" 
+        [alt]="certification.logoName + ' logo'"
+        class="certification-card__logo"
+        (error)="onLogoError($event)"
+        loading="lazy">
+      <div *ngIf="certification.isPursuing" class="certification-card__pursuing-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="12" cy="15" r="2" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </div>
+    </div>
+    <div class="certification-card__badges" *ngIf="certification.badges && certification.badges.length > 0">
+      <span class="certification-card__badge" *ngFor="let badge of certification.badges">{{ badge }}</span>
+    </div>
+  </div>
+
+  <!-- Title -->
+  <h3 class="certification-card__title">{{ certification.title }}</h3>
+
+  <!-- Issuer -->
+  <p class="certification-card__issuer">{{ certification.issuer }}</p>
+
+  <!-- Dates -->
+  <div class="certification-card__dates" *ngIf="!certification.isPursuing">
+    <span class="certification-card__date">
+      Issued {{ certification.issuedDate }}
+      <span *ngIf="certification.expiryDate"> · Expires {{ certification.expiryDate }}</span>
+    </span>
+  </div>
+  <div class="certification-card__eta" *ngIf="certification.isPursuing">
+    <span class="certification-card__eta-text">ETA: {{ certification.eta }}</span>
+  </div>
+
+  <!-- Tags -->
+  <div class="certification-card__tags" *ngIf="certification.tags && certification.tags.length > 0">
+    <span class="certification-card__tag" *ngFor="let tag of certification.tags">{{ tag }}</span>
+  </div>
+
+  <!-- Verify Button -->
+  <button 
+    class="certification-card__verify-btn"
+    *ngIf="!certification.isPursuing && certification.verifyUrl"
+    (click)="onVerifyClick()"
+    type="button"
+    [attr.aria-label]="'Verify ' + certification.title + ' credential'">
+    Verify Credential
+  </button>
+</div>

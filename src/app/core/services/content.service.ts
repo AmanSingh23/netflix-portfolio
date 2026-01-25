@@ -1,0 +1,329 @@
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { delay, map } from 'rxjs/operators';
+import { ContentItem } from '../models/content-item.model';
+import { ContentSection, SectionConfig } from '../models/section.model';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ContentService {
+  private contentSubject = new BehaviorSubject<ContentItem[]>([]);
+  private sectionsSubject = new BehaviorSubject<ContentSection[]>([]);
+
+  constructor() {
+    this.loadContent();
+  }
+
+  get content$(): Observable<ContentItem[]> {
+    return this.contentSubject.asObservable();
+  }
+
+  get sections$(): Observable<ContentSection[]> {
+    return this.sectionsSubject.asObservable();
+  }
+
+  getContentById(id: string): Observable<ContentItem | undefined> {
+    return this.content$.pipe(
+      map(content => content.find(item => item.id === id))
+    );
+  }
+
+  getContentByCategory(category: string): Observable<ContentItem[]> {
+    return this.content$.pipe(
+      map(content => content.filter(item => item.category === category))
+    );
+  }
+
+  getFeaturedContent(): Observable<ContentItem[]> {
+    return this.content$.pipe(
+      map(content => content.filter(item => item.isFeatured))
+    );
+  }
+
+  searchContent(query: string): Observable<ContentItem[]> {
+    if (!query.trim()) {
+      return this.content$;
+    }
+
+    return this.content$.pipe(
+      map(content => content.filter(item => 
+        item.title.toLowerCase().includes(query.toLowerCase()) ||
+        item.description.toLowerCase().includes(query.toLowerCase()) ||
+        item.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()))
+      ))
+    );
+  }
+
+  private loadContent(): void {
+    // Mock data - in real app, this would come from an API
+    const mockContent: ContentItem[] = [
+      {
+        id: 'work-permit',
+        title: 'Work Permit & Visa Status',
+        description: 'Current work authorization and visa status for employment opportunities',
+        image: 'assets/images/content/work-permit.jpg',
+        thumbnail: 'assets/images/content/work-permit-thumb.jpg',
+        category: 'professional',
+        type: 'work',
+        rating: 5,
+        duration: 'Valid until 2025',
+        year: 2024,
+        tags: ['work-permit', 'visa', 'authorization', 'employment'],
+        isFeatured: true,
+        details: {
+          overview: 'Full work authorization with valid visa status. Ready for immediate employment opportunities.',
+          skills: ['Legal Compliance', 'Documentation', 'Immigration Law'],
+          achievements: ['Valid Work Permit', 'Multi-year Visa', 'Clean Record'],
+          links: [
+            { type: 'documentation', url: '#', label: 'View Documents' }
+          ]
+        }
+      },
+      {
+        id: 'skills',
+        title: 'Technical Skills',
+        description: 'Comprehensive overview of technical skills and expertise',
+        image: 'assets/images/content/skills.jpg',
+        thumbnail: 'assets/images/content/skills-thumb.jpg',
+        category: 'professional',
+        type: 'work',
+        rating: 5,
+        duration: '5+ years',
+        year: 2024,
+        tags: ['angular', 'typescript', 'javascript', 'frontend', 'fullstack'],
+        isFeatured: true,
+        details: {
+          overview: 'Extensive experience in modern web development with focus on Angular, TypeScript, and full-stack solutions.',
+          skills: ['Angular', 'TypeScript', 'JavaScript', 'Node.js', 'React', 'Vue.js'],
+          technologies: ['HTML5', 'CSS3', 'SCSS', 'Bootstrap', 'Material Design'],
+          achievements: ['5+ Years Experience', 'Multiple Certifications', 'Open Source Contributions'],
+          links: [
+            { type: 'github', url: '#', label: 'GitHub Profile' },
+            { type: 'demo', url: '#', label: 'Live Projects' }
+          ]
+        }
+      },
+      {
+        id: 'experience',
+        title: 'Professional Experience',
+        description: 'Detailed work history and project experience',
+        image: 'assets/images/content/experience.jpg',
+        thumbnail: 'assets/images/content/experience-thumb.jpg',
+        category: 'professional',
+        type: 'work',
+        rating: 5,
+        duration: '5+ years',
+        year: 2024,
+        tags: ['experience', 'career', 'projects', 'leadership'],
+        isFeatured: true,
+        details: {
+          overview: 'Proven track record in software development with experience in leading teams and delivering complex projects.',
+          skills: ['Team Leadership', 'Project Management', 'Agile Development', 'Code Review'],
+          achievements: ['Led 10+ Projects', 'Mentored Junior Developers', 'Improved Performance by 40%'],
+          testimonials: [
+            {
+              author: 'John Smith',
+              role: 'Senior Manager',
+              company: 'Tech Corp',
+              text: 'Exceptional developer with great leadership skills.',
+              rating: 5
+            }
+          ]
+        }
+      },
+      {
+        id: 'certifications',
+        title: 'Certifications',
+        description: 'Professional certifications and achievements',
+        image: 'assets/images/content/certifications.jpg',
+        thumbnail: 'assets/images/content/certifications-thumb.jpg',
+        category: 'professional',
+        type: 'certification',
+        rating: 5,
+        duration: 'Ongoing',
+        year: 2024,
+        tags: ['certifications', 'aws', 'angular', 'microsoft'],
+        isFeatured: false,
+        details: {
+          overview: 'Industry-recognized certifications demonstrating expertise in modern technologies.',
+          achievements: ['AWS Certified Developer', 'Angular Expert', 'Microsoft Azure']
+        }
+      },
+      {
+        id: 'recommendations',
+        title: 'Recommendations',
+        description: 'Professional recommendations and testimonials',
+        image: 'assets/images/content/recommendations.jpg',
+        thumbnail: 'assets/images/content/recommendations-thumb.jpg',
+        category: 'professional',
+        type: 'recommendation',
+        rating: 5,
+        duration: 'Recent',
+        year: 2024,
+        tags: ['recommendations', 'testimonials', 'references'],
+        isFeatured: false,
+        details: {
+          overview: 'Strong recommendations from colleagues and managers highlighting professional excellence.',
+          testimonials: [
+            {
+              author: 'Sarah Johnson',
+              role: 'Product Manager',
+              company: 'InnovateTech',
+              text: 'Outstanding problem-solving skills and attention to detail.',
+              rating: 5
+            },
+            {
+              author: 'Mike Chen',
+              role: 'Tech Lead',
+              company: 'DevCorp',
+              text: 'Great team player with excellent technical skills.',
+              rating: 5
+            }
+          ]
+        }
+      },
+      {
+        id: 'projects',
+        title: 'Portfolio Projects',
+        description: 'Showcase of personal and professional projects',
+        image: 'assets/images/content/projects.jpg',
+        thumbnail: 'assets/images/content/projects-thumb.jpg',
+        category: 'professional',
+        type: 'project',
+        rating: 5,
+        duration: 'Ongoing',
+        year: 2024,
+        tags: ['projects', 'portfolio', 'github', 'showcase'],
+        isFeatured: true,
+        details: {
+          overview: 'Collection of innovative projects demonstrating technical skills and creativity.',
+          skills: ['Full-Stack Development', 'UI/UX Design', 'API Development'],
+          technologies: ['Angular', 'Node.js', 'MongoDB', 'Docker'],
+          links: [
+            { type: 'github', url: '#', label: 'GitHub Repository' },
+            { type: 'demo', url: '#', label: 'Live Demo' }
+          ]
+        }
+      },
+      {
+        id: 'music',
+        title: 'Music & Audio',
+        description: 'Personal music projects and audio work',
+        image: 'assets/images/content/music.jpg',
+        thumbnail: 'assets/images/content/music-thumb.jpg',
+        category: 'personal',
+        type: 'project',
+        rating: 4,
+        duration: 'Hobby',
+        year: 2024,
+        tags: ['music', 'audio', 'creative', 'hobby'],
+        isFeatured: false,
+        details: {
+          overview: 'Creative audio projects and music compositions.',
+          skills: ['Audio Production', 'Music Composition', 'Sound Design'],
+          links: [
+            { type: 'other', url: '#', label: 'Listen on SoundCloud' }
+          ]
+        }
+      },
+      {
+        id: 'reading',
+        title: 'Reading List',
+        description: 'Books and articles currently reading',
+        image: 'assets/images/content/reading.jpg',
+        thumbnail: 'assets/images/content/reading-thumb.jpg',
+        category: 'personal',
+        type: 'project',
+        rating: 4,
+        duration: 'Ongoing',
+        year: 2024,
+        tags: ['reading', 'books', 'learning', 'personal-growth'],
+        isFeatured: false,
+        details: {
+          overview: 'Current reading list focusing on technology, leadership, and personal development.',
+          skills: ['Continuous Learning', 'Research', 'Critical Thinking'],
+          links: [
+            { type: 'other', url: '#', label: 'Goodreads Profile' }
+          ]
+        }
+      },
+      {
+        id: 'blogs',
+        title: 'Blog & Articles',
+        description: 'Technical blog posts and articles',
+        image: 'assets/images/content/blogs.jpg',
+        thumbnail: 'assets/images/content/blogs-thumb.jpg',
+        category: 'personal',
+        type: 'project',
+        rating: 4,
+        duration: 'Ongoing',
+        year: 2024,
+        tags: ['blog', 'writing', 'technical', 'sharing'],
+        isFeatured: false,
+        details: {
+          overview: 'Technical blog sharing knowledge and insights about web development.',
+          skills: ['Technical Writing', 'Content Creation', 'Knowledge Sharing'],
+          links: [
+            { type: 'other', url: '#', label: 'Read Blog' }
+          ]
+        }
+      },
+      {
+        id: 'contact',
+        title: 'Contact Information',
+        description: 'Get in touch for opportunities and collaborations',
+        image: 'assets/images/content/contact.jpg',
+        thumbnail: 'assets/images/content/contact-thumb.jpg',
+        category: 'personal',
+        type: 'project',
+        rating: 5,
+        duration: 'Always Available',
+        year: 2024,
+        tags: ['contact', 'networking', 'opportunities', 'collaboration'],
+        isFeatured: false,
+        details: {
+          overview: 'Ready to discuss new opportunities and exciting projects.',
+          skills: ['Communication', 'Networking', 'Collaboration'],
+          links: [
+            { type: 'other', url: 'mailto:contact@example.com', label: 'Send Email' },
+            { type: 'other', url: '#', label: 'LinkedIn Profile' }
+          ]
+        }
+      }
+    ];
+
+    const mockSections: ContentSection[] = [
+      {
+        id: 'todays-picks',
+        title: "Today's Top Picks for recruiter",
+        type: 'horizontal',
+        items: ['work-permit', 'skills', 'experience', 'certifications', 'recommendations', 'projects'],
+        isLazy: false
+      },
+      {
+        id: 'continue-watching',
+        title: 'Continue Watching for recruiter',
+        type: 'horizontal',
+        items: ['music', 'reading', 'blogs', 'contact'],
+        isLazy: false
+      },
+      {
+        id: 'featured',
+        title: 'Featured Portfolio Items',
+        type: 'hero',
+        items: ['work-permit', 'skills', 'experience'],
+        isLazy: false
+      }
+    ];
+
+    // Simulate loading delay
+    of(mockContent).pipe(delay(500)).subscribe(content => {
+      this.contentSubject.next(content);
+    });
+
+    of(mockSections).pipe(delay(500)).subscribe(sections => {
+      this.sectionsSubject.next(sections);
+    });
+  }
+}

@@ -1,0 +1,74 @@
+<div class="profile-selection-container">
+  <!-- Background -->
+  <div class="profile-selection-background">
+    <div class="profile-selection-background__gradient"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="profile-selection-header">
+    <div class="profile-selection-header__container">
+      <h1 class="profile-selection-header__title">AMAN SINGH</h1>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="profile-selection-main">
+    <div class="profile-selection-content">
+      <!-- Title -->
+      <div class="profile-selection-title">
+        <h2 class="profile-selection-title__text">Who's watching?</h2>
+      </div>
+
+      <!-- Profiles Grid -->
+      <div class="profile-selection-profiles" *ngIf="!isLoading">
+        <div 
+          class="profile-card"
+          *ngFor="let profile of profiles; let i = index"
+          [class.profile-card--selected]="selectedProfile?.id === profile.id"
+          (click)="selectProfile(profile)"
+          (mouseenter)="onProfileHover(profile)"
+          [style.animation-delay]="(i * 0.1) + 's'">
+          
+          <!-- Profile Avatar -->
+          <div class="profile-card__avatar">
+            <div 
+              class="profile-card__avatar-container"
+              [style.background-color]="profile.color">
+              <img 
+                [src]="profile.avatar" 
+                [alt]="profile.name"
+                class="profile-card__avatar-image">
+            </div>
+          </div>
+
+          <!-- Profile Name -->
+          <div class="profile-card__name">
+            <span class="profile-card__name-text">{{ profile.name }}</span>
+          </div>
+
+          <!-- Child Badge -->
+          <div class="profile-card__badge" *ngIf="profile.isChild">
+            <span class="profile-card__badge-text">Kids</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Loading State -->
+      <div class="profile-selection-loading" *ngIf="isLoading">
+        <div class="profile-selection-loading__spinner"></div>
+        <p class="profile-selection-loading__text">Loading profiles...</p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="profile-selection-footer">
+    <div class="profile-selection-footer__container">
+      <p class="profile-selection-footer__text">
+        © 2024 Aman Singh Portfolio. All rights reserved.
+      </p>
+    </div>
+  </footer>
+</div>

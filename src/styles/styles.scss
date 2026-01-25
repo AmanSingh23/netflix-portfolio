@@ -1,0 +1,249 @@
+// Netflix Portfolio Styles
+// Main stylesheet that imports all other styles
+
+// Abstracts
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
+// Base
+@import 'base/reset';
+@import 'base/typography';
+@import 'base/base';
+
+// Components
+@import 'components/icons';
+
+// Themes
+@import 'themes/netflix';
+
+// Global animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+  }
+}
+
+// Global styles
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: $netflix-black;
+  color: $white;
+  font-family: $font-family-primary;
+  line-height: $line-height-normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// App root
+app-root {
+  display: block;
+  min-height: 100vh;
+}
+
+// Router outlet
+router-outlet {
+  display: block;
+}
+
+// Common utility classes
+.container {
+  @include container;
+}
+
+// Loading states
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid $netflix-red;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+// Error states
+.error {
+  color: $netflix-red;
+  background: rgba(229, 9, 20, 0.1);
+  border: 1px solid rgba(229, 9, 20, 0.3);
+  padding: $spacing-lg;
+  border-radius: $border-radius-md;
+  margin: $spacing-lg 0;
+}
+
+// Success states
+.success {
+  color: #00d4aa;
+  background: rgba(0, 212, 170, 0.1);
+  border: 1px solid rgba(0, 212, 170, 0.3);
+  padding: $spacing-lg;
+  border-radius: $border-radius-md;
+  margin: $spacing-lg 0;
+}
+
+// Warning states
+.warning {
+  color: #ffd700;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  padding: $spacing-lg;
+  border-radius: $border-radius-md;
+  margin: $spacing-lg 0;
+}
+
+// Info states
+.info {
+  color: #4a9eff;
+  background: rgba(74, 158, 255, 0.1);
+  border: 1px solid rgba(74, 158, 255, 0.3);
+  padding: $spacing-lg;
+  border-radius: $border-radius-md;
+  margin: $spacing-lg 0;
+}
+
+// Accessibility
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Focus styles
+:focus {
+  outline: 2px solid $netflix-red;
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+// Selection styles
+::selection {
+  background: $netflix-red;
+  color: $white;
+}
+
+// Scrollbar styles
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $netflix-black;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $netflix-gray;
+  border-radius: $border-radius-sm;
+  
+  &:hover {
+    background: $netflix-gray-light;
+  }
+}
+
+// Print styles
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+  
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}

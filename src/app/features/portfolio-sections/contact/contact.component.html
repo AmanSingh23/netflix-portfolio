@@ -1,0 +1,42 @@
+<div class="contact-container">
+  <app-header></app-header>
+  <main class="contact-main">
+    <div class="contact-content">
+      <!-- Profile Card -->
+      <div class="profile-card" #profileCard>
+        <div class="profile-card__image">
+          <img src="assets/images/profiles/aman-singh.png" alt="Aman Singh" />
+        </div>
+        <div class="profile-card__content">
+          <h2 class="profile-card__name">{{ profile.name }}</h2>
+          <p class="profile-card__title">{{ profile.title }}</p>
+          <p class="profile-card__summary">{{ profile.summary }}</p>
+          <p class="profile-card__affiliation">{{ profile.affiliation }}</p>
+          <button class="profile-card__button" (click)="openLinkedIn()">
+            <i class="fab fa-linkedin"></i>
+            <span>View Profile</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Contact Section -->
+      <div class="contact-section" #contactSection>
+        <p class="contact-message">I'm always up for a chat or a coffee! Feel free to reach out.</p>
+        
+        <div class="contact-buttons">
+          <button class="contact-button" (click)="openEmail()">
+            <i class="fas fa-envelope"></i>
+            <span>{{ profile.email }}</span>
+          </button>
+          
+          <button class="contact-button" (click)="openPhone()">
+            <i class="fas fa-phone"></i>
+            <span>{{ profile.phone }}</span>
+          </button>
+        </div>
+        
+        <p class="contact-closing">Or catch up over a coffee ☕</p>
+      </div>
+    </div>
+  </main>
+</div>

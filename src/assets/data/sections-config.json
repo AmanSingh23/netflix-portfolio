@@ -1,0 +1,27 @@
+{
+  "sections": [
+    {
+      "id": "todays-picks",
+      "title": "Today's Top Picks for recruiter",
+      "type": "horizontal",
+      "items": ["work-permit", "skills", "experience", "certifications", "recommendations", "projects"],
+      "isLazy": false
+    },
+    {
+      "id": "continue-watching",
+      "title": "Continue Watching for recruiter",
+      "type": "horizontal",
+      "items": ["music", "reading", "blogs", "contact"],
+      "isLazy": false
+    },
+    {
+      "id": "featured",
+      "title": "Featured Portfolio Items",
+      "type": "hero",
+      "items": ["work-permit", "skills", "experience"],
+      "isLazy": false
+    }
+  ],
+  "featuredSection": "featured",
+  "heroSection": "featured"
+}

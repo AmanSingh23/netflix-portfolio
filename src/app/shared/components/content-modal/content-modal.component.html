@@ -1,0 +1,163 @@
+<div 
+  class="content-modal"
+  [class.content-modal--open]="isOpen"
+  (click)="onBackdropClick($event)"
+  *ngIf="content">
+  
+  <div class="content-modal__container" [class.content-modal__container--skills]="isSkillsContent()" [class.content-modal__container--professional]="isProfessionalContent()" [class.content-modal__container--certifications]="isCertificationsContent()">
+    <!-- Close Button -->
+    <button 
+      class="content-modal__close"
+      (click)="closeModal()"
+      aria-label="Close modal">
+      <i class="icon-close"></i>
+    </button>
+
+    <!-- Content -->
+    <div class="content-modal__content">
+      <!-- Skills Component (when content is skills) -->
+      <div class="content-modal__skills" *ngIf="content?.id === 'skills'">
+        <ng-container #skillsContainer></ng-container>
+      </div>
+      
+      <!-- Professional Component (when content is experience) -->
+      <div class="content-modal__professional" *ngIf="content?.id === 'experience'">
+        <ng-container #professionalContainer></ng-container>
+      </div>
+      
+      <!-- Certifications Component (when content is certifications) -->
+      <div class="content-modal__certifications" *ngIf="content?.id === 'certifications'">
+        <ng-container #certificationsContainer></ng-container>
+      </div>
+      
+      <!-- Regular Content (when not skills, experience, or certifications) -->
+      <ng-container *ngIf="content?.id !== 'skills' && content?.id !== 'experience' && content?.id !== 'certifications'">
+      <!-- Hero Image -->
+      <div class="content-modal__hero">
+        <img 
+          [src]="getImageUrl()" 
+          [alt]="content.title"
+          class="content-modal__hero-image">
+        
+        <div class="content-modal__hero-overlay">
+          <div class="content-modal__hero-info">
+            <h1 class="content-modal__title">{{ content.title }}</h1>
+            <div class="content-modal__meta">
+              <span class="content-modal__rating" *ngIf="content.rating">
+                <i class="icon-star"></i>
+                {{ content.rating }}
+              </span>
+              <span class="content-modal__year" *ngIf="content.year">
+                {{ content.year }}
+              </span>
+              <span class="content-modal__duration" *ngIf="content.duration">
+                {{ content.duration }}
+              </span>
+            </div>
+            <p class="content-modal__description" *ngIf="content.description">
+              {{ content.description }}
+            </p>
+            <div class="content-modal__actions">
+              <button 
+                class="content-modal__play-button"
+                (click)="onPlay()">
+                <i class="icon-play"></i>
+                <span>View Details</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Details Section -->
+      <div class="content-modal__details" *ngIf="content.details">
+        <div class="content-modal__details-content">
+          <!-- Overview -->
+          <div class="content-modal__section" *ngIf="content.details.overview">
+            <h3 class="content-modal__section-title">Overview</h3>
+            <p class="content-modal__section-text">{{ content.details.overview }}</p>
+          </div>
+
+          <!-- Skills -->
+          <div class="content-modal__section" *ngIf="content.details.skills?.length">
+            <h3 class="content-modal__section-title">Skills</h3>
+            <div class="content-modal__tags">
+              <span 
+                class="content-modal__tag"
+                *ngFor="let skill of content.details.skills">
+                {{ skill }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Technologies -->
+          <div class="content-modal__section" *ngIf="content.details.technologies?.length">
+            <h3 class="content-modal__section-title">Technologies</h3>
+            <div class="content-modal__tags">
+              <span 
+                class="content-modal__tag"
+                *ngFor="let tech of content.details.technologies">
+                {{ tech }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Achievements -->
+          <div class="content-modal__section" *ngIf="content.details.achievements?.length">
+            <h3 class="content-modal__section-title">Achievements</h3>
+            <ul class="content-modal__list">
+              <li 
+                class="content-modal__list-item"
+                *ngFor="let achievement of content.details.achievements">
+                {{ achievement }}
+              </li>
+            </ul>
+          </div>
+
+          <!-- Links -->
+          <div class="content-modal__section" *ngIf="content.details.links?.length">
+            <h3 class="content-modal__section-title">Links</h3>
+            <div class="content-modal__links">
+              <a 
+                *ngFor="let link of content.details.links"
+                [href]="link.url"
+                class="content-modal__link"
+                target="_blank"
+                rel="noopener noreferrer">
+                <i [class]="'icon-' + link.type"></i>
+                <span>{{ link.label }}</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Testimonials -->
+          <div class="content-modal__section" *ngIf="content.details.testimonials?.length">
+            <h3 class="content-modal__section-title">Testimonials</h3>
+            <div class="content-modal__testimonials">
+              <div 
+                class="content-modal__testimonial"
+                *ngFor="let testimonial of content.details.testimonials">
+                <div class="content-modal__testimonial-content">
+                  <p class="content-modal__testimonial-text">"{{ testimonial.text }}"</p>
+                  <div class="content-modal__testimonial-author">
+                    <span class="content-modal__testimonial-name">{{ testimonial.author }}</span>
+                    <span class="content-modal__testimonial-role">{{ testimonial.role }}, {{ testimonial.company }}</span>
+                  </div>
+                </div>
+                <div class="content-modal__testimonial-rating">
+                  <span 
+                    class="content-modal__testimonial-star"
+                    *ngFor="let star of [1,2,3,4,5]"
+                    [class.content-modal__testimonial-star--active]="star <= testimonial.rating">
+                    <i class="icon-star"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

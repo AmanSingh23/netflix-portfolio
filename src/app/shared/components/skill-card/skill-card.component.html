@@ -1,0 +1,17 @@
+<div class="skill-card" [attr.aria-label]="skill.name + ' skill'">
+  <div class="skill-card__icon">
+    <ng-container *ngIf="iconInfo && iconInfo.type === 'simpleicon'; else fontAwesomeIcon">
+      <img 
+        [src]="getSimpleIconUrl(iconInfo.value)" 
+        [alt]="skill.name + ' icon'" 
+        class="skill-card__simple-icon"
+        (error)="onIconError($event, skill.name)"
+        loading="lazy" />
+    </ng-container>
+    <ng-template #fontAwesomeIcon>
+      <i [class]="iconInfo?.value || 'fas fa-code'" aria-hidden="true"></i>
+    </ng-template>
+  </div>
+  <h3 class="skill-card__name">{{ skill.name }}</h3>
+  <p class="skill-card__description">{{ skill.description }}</p>
+</div>

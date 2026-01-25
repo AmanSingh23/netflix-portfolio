@@ -1,0 +1,304 @@
+// Netflix theme styles
+.netflix-theme {
+  // Color scheme
+  --primary-color: #{$netflix-red};
+  --primary-hover: #{$netflix-red-hover};
+  --primary-dark: #{$netflix-red-dark};
+  
+  --background-color: #{$netflix-black};
+  --background-light: #{$netflix-black-light};
+  --background-lighter: #{$netflix-black-lighter};
+  
+  --text-primary: #{$white};
+  --text-secondary: #{$white-muted};
+  --text-muted: #{$white-faded};
+  
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-hover: rgba(255, 255, 255, 0.2);
+  
+  // Typography
+  --font-family: #{$font-family-primary};
+  --font-size-base: #{$font-size-base};
+  --line-height-base: #{$line-height-normal};
+  
+  // Spacing
+  --spacing-xs: #{$spacing-xs};
+  --spacing-sm: #{$spacing-sm};
+  --spacing-md: #{$spacing-md};
+  --spacing-lg: #{$spacing-lg};
+  --spacing-xl: #{$spacing-xl};
+  
+  // Shadows
+  --shadow-sm: #{$shadow-sm};
+  --shadow-md: #{$shadow-md};
+  --shadow-lg: #{$shadow-lg};
+  --shadow-netflix: #{$shadow-netflix};
+  
+  // Transitions
+  --transition-fast: #{$transition-fast};
+  --transition-normal: #{$transition-normal};
+  --transition-slow: #{$transition-slow};
+}
+
+// Netflix-specific components
+.netflix-logo {
+  font-family: $font-family-primary;
+  font-weight: $font-weight-extrabold;
+  color: $netflix-red;
+  text-decoration: none;
+  letter-spacing: -0.5px;
+  transition: color $transition-normal;
+  
+  &:hover {
+    color: $netflix-red-hover;
+  }
+}
+
+.netflix-button {
+  @include button-primary;
+  
+  &.netflix-button-secondary {
+    @include button-secondary;
+  }
+  
+  &.netflix-button-large {
+    padding: $spacing-lg $spacing-2xl;
+    font-size: $font-size-lg;
+  }
+  
+  &.netflix-button-small {
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+  }
+}
+
+.netflix-card {
+  @include card-base;
+  @include card-hover;
+  
+  &.netflix-card-featured {
+    border: 2px solid $netflix-red;
+    background: rgba(229, 9, 20, 0.1);
+  }
+  
+  &.netflix-card-new {
+    position: relative;
+    
+    &::before {
+      content: 'NEW';
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: $netflix-red;
+      color: $white;
+      padding: 2px 6px;
+      border-radius: $border-radius-sm;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  }
+}
+
+.netflix-input {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: $border-radius-md;
+  color: $white;
+  padding: $spacing-md $spacing-lg;
+  font-family: $font-family-primary;
+  font-size: $font-size-base;
+  transition: all $transition-normal;
+  
+  &:focus {
+    outline: none;
+    border-color: $netflix-red;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.2);
+  }
+  
+  &::placeholder {
+    color: $white-faded;
+  }
+}
+
+.netflix-select {
+  @extend .netflix-input;
+  cursor: pointer;
+  
+  option {
+    background: $netflix-black;
+    color: $white;
+  }
+}
+
+.netflix-textarea {
+  @extend .netflix-input;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.netflix-checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: $border-radius-sm;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: all $transition-normal;
+  
+  &:checked {
+    background: $netflix-red;
+    border-color: $netflix-red;
+    
+    &::after {
+      content: '✓';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: $white;
+      font-size: 12px;
+      font-weight: $font-weight-bold;
+    }
+  }
+  
+  &:hover {
+    border-color: $netflix-red;
+  }
+}
+
+.netflix-radio {
+  @extend .netflix-checkbox;
+  border-radius: $border-radius-full;
+  
+  &:checked::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: $white;
+    border-radius: $border-radius-full;
+  }
+}
+
+// Netflix animations
+@keyframes netflixFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes netflixSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes netflixScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes netflixPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes netflixGlow {
+  0%, 100% {
+    text-shadow: 0 0 20px rgba(229, 9, 20, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 30px rgba(229, 9, 20, 0.6);
+  }
+}
+
+// Netflix utility classes
+.netflix-fade-in {
+  animation: netflixFadeIn 0.6s ease-out;
+}
+
+.netflix-slide-in {
+  animation: netflixSlideIn 0.6s ease-out;
+}
+
+.netflix-scale-in {
+  animation: netflixScaleIn 0.4s ease-out;
+}
+
+.netflix-pulse {
+  animation: netflixPulse 2s ease-in-out infinite;
+}
+
+.netflix-glow {
+  animation: netflixGlow 2s ease-in-out infinite;
+}
+
+// Netflix gradients
+.netflix-gradient-primary {
+  background: linear-gradient(135deg, $netflix-red, $netflix-red-hover);
+}
+
+.netflix-gradient-dark {
+  @include netflix-gradient;
+}
+
+.netflix-gradient-overlay {
+  @include netflix-hero-overlay;
+}
+
+// Netflix effects
+.netflix-blur {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.netflix-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+// Netflix responsive utilities
+@include mobile {
+  .netflix-mobile-hidden {
+    display: none;
+  }
+  
+  .netflix-mobile-full {
+    width: 100%;
+  }
+}
+
+@include desktop {
+  .netflix-desktop-hidden {
+    display: none;
+  }
+  
+  .netflix-desktop-flex {
+    display: flex;
+  }
+}

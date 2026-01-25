@@ -1,0 +1,11 @@
+Placeholder for hero background video
+
+To add your video:
+1. Replace this file with your actual video file named "hero-background.mp4"
+2. Supported formats: MP4, WebM, OGG
+3. Recommended resolution: 1920x1080 or higher
+4. Recommended duration: 10-30 seconds (will loop)
+5. Keep file size reasonable for web (under 10MB recommended)
+
+The video will automatically play as background in the dashboard hero section.
+

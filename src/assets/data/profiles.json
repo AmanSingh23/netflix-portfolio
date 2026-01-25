@@ -1,0 +1,30 @@
+[
+  {
+    "id": "aman",
+    "name": "AMAN",
+    "avatar": "assets/images/profiles/aman-avatar.png",
+    "isChild": false,
+    "color": "#E50914"
+  },
+  {
+    "id": "rapso",
+    "name": "Rapso",
+    "avatar": "assets/images/profiles/rapso-avatar.png",
+    "isChild": false,
+    "color": "#221F1F"
+  },
+  {
+    "id": "children",
+    "name": "Children",
+    "avatar": "assets/images/profiles/children-avatar.png",
+    "isChild": true,
+    "color": "#564D4D"
+  },
+  {
+    "id": "popa",
+    "name": "popa",
+    "avatar": "assets/images/profiles/popa-avatar.png",
+    "isChild": false,
+    "color": "#B81D13"
+  }
+]

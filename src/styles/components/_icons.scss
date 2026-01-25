@@ -1,0 +1,89 @@
+// Icon styles for Netflix portfolio
+// These are placeholder styles - in a real project you would use an icon font or SVG icons
+
+.icon-star::before {
+  content: '★';
+  color: #ffd700;
+}
+
+.icon-play::before {
+  content: '▶';
+}
+
+.icon-pause::before {
+  content: '⏸';
+}
+
+.icon-close::before {
+  content: '✕';
+}
+
+.icon-menu::before {
+  content: '☰';
+}
+
+.icon-arrow-left::before {
+  content: '←';
+}
+
+.icon-arrow-right::before {
+  content: '→';
+}
+
+.icon-chevron-left::before {
+  content: '‹';
+}
+
+.icon-chevron-right::before {
+  content: '›';
+}
+
+.icon-plus::before {
+  content: '+';
+}
+
+.icon-settings::before {
+  content: '⚙';
+}
+
+.icon-info::before {
+  content: 'ℹ';
+}
+
+.icon-github::before {
+  content: '🐙';
+}
+
+.icon-demo::before {
+  content: '🔗';
+}
+
+.icon-documentation::before {
+  content: '📄';
+}
+
+.icon-video::before {
+  content: '🎥';
+}
+
+.icon-other::before {
+  content: '🔗';
+}
+
+.icon-volume-up::before {
+  content: '';
+}
+
+.icon-volume-off::before {
+  content: '';
+}
+
+// Icon base styles
+[class^="icon-"], [class*=" icon-"] {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+  font-size: inherit;
+}

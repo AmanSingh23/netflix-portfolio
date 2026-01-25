@@ -1,0 +1,53 @@
+<div class="loading-container">
+  <!-- Background -->
+  <div class="loading-background">
+    <div class="loading-background__gradient"></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="loading-content">
+    <!-- Logo/Brand -->
+    <div class="loading-brand">
+      <h1 class="loading-brand__title">AMAN SINGH</h1>
+      <p class="loading-brand__subtitle">Portfolio</p>
+    </div>
+
+    <!-- Loading Animation -->
+    <div class="loading-animation">
+      <!-- Netflix-style loading spinner -->
+      <div class="loading-spinner">
+        <div class="loading-spinner__ring">
+
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="loading-progress">
+        <div class="loading-progress__bar">
+          <div 
+            class="loading-progress__fill"
+            [style.width.%]="loadingProgress">
+          </div>
+        </div>
+        <div class="loading-progress__percentage">
+          {{ loadingProgress | number:'1.0-0' }}%
+        </div>
+      </div>
+
+      <!-- Loading Message -->
+      <div class="loading-message">
+        <p class="loading-message__text">{{ loadingMessage }}</p>
+      </div>
+    </div>
+
+    <!-- Completion Message -->
+    <div class="loading-complete" [class.loading-complete--visible]="isComplete">
+      <div class="loading-complete__checkmark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 6L9 17l-5-5"/>
+        </svg>
+      </div>
+      <p class="loading-complete__text">Ready!</p>
+    </div>
+  </div>
+</div>

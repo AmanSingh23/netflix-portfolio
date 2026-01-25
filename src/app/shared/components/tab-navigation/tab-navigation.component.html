@@ -1,0 +1,17 @@
+<nav class="tab-navigation" role="tablist" [attr.aria-label]="'Tab navigation'">
+  <button
+    *ngFor="let tab of tabs"
+    [id]="'tab-' + tab.id"
+    [attr.aria-selected]="isActive(tab.id)"
+    [attr.aria-controls]="'panel-' + tab.id"
+    [attr.aria-disabled]="tab.disabled"
+    role="tab"
+    class="tab-navigation__tab"
+    [class.tab-navigation__tab--active]="isActive(tab.id)"
+    [class.tab-navigation__tab--disabled]="tab.disabled"
+    [style.--active-indicator-color]="activeIndicatorColor"
+    (click)="onTabClick(tab)"
+    [disabled]="tab.disabled">
+    {{ tab.label }}
+  </button>
+</nav>

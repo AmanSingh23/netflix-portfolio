@@ -1,0 +1,304 @@
+// Typography styles
+body {
+  font-family: $font-family-primary;
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  color: $white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Headings
+h1, .h1 {
+  font-size: $font-size-7xl;
+  font-weight: $font-weight-extrabold;
+  line-height: $line-height-tight;
+  color: $white;
+  
+  @include mobile {
+    font-size: $font-size-5xl;
+  }
+}
+
+h2, .h2 {
+  font-size: $font-size-6xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  color: $white;
+  
+  @include mobile {
+    font-size: $font-size-4xl;
+  }
+}
+
+h3, .h3 {
+  font-size: $font-size-4xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  color: $white;
+  
+  @include mobile {
+    font-size: $font-size-3xl;
+  }
+}
+
+h4, .h4 {
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+  color: $white;
+  
+  @include mobile {
+    font-size: $font-size-2xl;
+  }
+}
+
+h5, .h5 {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-normal;
+  color: $white;
+  
+  @include mobile {
+    font-size: $font-size-xl;
+  }
+}
+
+h6, .h6 {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-normal;
+  color: $white;
+  
+  @include mobile {
+    font-size: $font-size-lg;
+  }
+}
+
+// Body text
+p, .text {
+  font-size: $font-size-base;
+  line-height: $line-height-relaxed;
+  color: $white-muted;
+  margin-bottom: $spacing-lg;
+  
+  &.text-large {
+    font-size: $font-size-lg;
+    line-height: $line-height-loose;
+  }
+  
+  &.text-small {
+    font-size: $font-size-sm;
+    line-height: $line-height-normal;
+  }
+  
+  &.text-muted {
+    color: $white-faded;
+  }
+  
+  &.text-white {
+    color: $white;
+  }
+}
+
+// Links
+a, .link {
+  color: $netflix-red;
+  text-decoration: none;
+  transition: color $transition-normal;
+  
+  &:hover {
+    color: $netflix-red-hover;
+    text-decoration: underline;
+  }
+  
+  &.link-muted {
+    color: $white-muted;
+    
+    &:hover {
+      color: $white;
+    }
+  }
+  
+  &.link-white {
+    color: $white;
+    
+    &:hover {
+      color: $netflix-red;
+    }
+  }
+}
+
+// Lists
+ul, ol {
+  margin: 0;
+  padding-left: $spacing-xl;
+  
+  li {
+    margin-bottom: $spacing-sm;
+    line-height: $line-height-relaxed;
+    color: $white-muted;
+  }
+}
+
+ul {
+  list-style-type: disc;
+  
+  &.list-unstyled {
+    list-style: none;
+    padding-left: 0;
+  }
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+// Text utilities
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.text-lowercase {
+  text-transform: lowercase;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+.text-truncate {
+  @include text-truncate;
+}
+
+.text-multiline-truncate {
+  @include text-multiline-truncate(2);
+}
+
+// Font weights
+.font-light {
+  font-weight: $font-weight-light;
+}
+
+.font-normal {
+  font-weight: $font-weight-normal;
+}
+
+.font-medium {
+  font-weight: $font-weight-medium;
+}
+
+.font-semibold {
+  font-weight: $font-weight-semibold;
+}
+
+.font-bold {
+  font-weight: $font-weight-bold;
+}
+
+.font-extrabold {
+  font-weight: $font-weight-extrabold;
+}
+
+// Font sizes
+.text-xs {
+  font-size: $font-size-xs;
+}
+
+.text-sm {
+  font-size: $font-size-sm;
+}
+
+.text-base {
+  font-size: $font-size-base;
+}
+
+.text-lg {
+  font-size: $font-size-lg;
+}
+
+.text-xl {
+  font-size: $font-size-xl;
+}
+
+.text-2xl {
+  font-size: $font-size-2xl;
+}
+
+.text-3xl {
+  font-size: $font-size-3xl;
+}
+
+.text-4xl {
+  font-size: $font-size-4xl;
+}
+
+.text-5xl {
+  font-size: $font-size-5xl;
+}
+
+.text-6xl {
+  font-size: $font-size-6xl;
+}
+
+.text-7xl {
+  font-size: $font-size-7xl;
+}
+
+// Line heights
+.leading-tight {
+  line-height: $line-height-tight;
+}
+
+.leading-normal {
+  line-height: $line-height-normal;
+}
+
+.leading-relaxed {
+  line-height: $line-height-relaxed;
+}
+
+.leading-loose {
+  line-height: $line-height-loose;
+}
+
+// Netflix-specific typography
+.netflix-title {
+  font-family: $font-family-primary;
+  font-weight: $font-weight-extrabold;
+  color: $netflix-red;
+  letter-spacing: -0.5px;
+  text-shadow: 0 0 20px rgba(229, 9, 20, 0.3);
+}
+
+.netflix-subtitle {
+  font-family: $font-family-primary;
+  font-weight: $font-weight-light;
+  color: $white-muted;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.netflix-description {
+  font-family: $font-family-primary;
+  font-weight: $font-weight-normal;
+  color: $white-muted;
+  line-height: $line-height-relaxed;
+}

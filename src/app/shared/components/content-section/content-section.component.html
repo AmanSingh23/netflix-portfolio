@@ -1,0 +1,90 @@
+<section [class]="getSectionClasses()" *ngIf="!isLoading">
+  <!-- Section Header -->
+  <div class="content-section__header" *ngIf="showTitle">
+    <h2 class="content-section__title">{{ section.title }}</h2>
+    <p class="content-section__subtitle" *ngIf="section.subtitle">
+      {{ section.subtitle }}
+    </p>
+  </div>
+
+  <!-- Horizontal Scrolling Container -->
+  <div class="content-section__container" *ngIf="section.type === 'horizontal'">
+    <!-- Left Scroll Button -->
+    <button 
+      class="content-section__scroll-button content-section__scroll-button--left"
+      [class.content-section__scroll-button--disabled]="!canScrollLeft"
+      (click)="scrollLeft()"
+      *ngIf="canScrollLeft">
+      <i class="icon-chevron-left"></i>
+    </button>
+
+    <!-- Content Row -->
+    <div 
+      class="content-section__row"
+      [id]="'section-' + section.id"
+      (scroll)="onScroll($event)">
+      <app-content-card
+        *ngFor="let item of contentItems"
+        [content]="item"
+        size="medium"
+        (cardClick)="onItemClick($event)">
+      </app-content-card>
+    </div>
+
+    <!-- Right Scroll Button -->
+    <button 
+      class="content-section__scroll-button content-section__scroll-button--right"
+      [class.content-section__scroll-button--disabled]="!canScrollRight"
+      (click)="scrollRight()"
+      *ngIf="canScrollRight">
+      <i class="icon-chevron-right"></i>
+    </button>
+  </div>
+
+  <!-- Grid Layout -->
+  <div class="content-section__grid" *ngIf="section.type === 'grid'">
+    <app-content-card
+      *ngFor="let item of contentItems"
+      [content]="item"
+      size="medium"
+      (cardClick)="onItemClick($event)">
+    </app-content-card>
+  </div>
+
+  <!-- Hero Layout -->
+  <div class="content-section__hero" *ngIf="section.type === 'hero'">
+    <app-content-card
+      *ngFor="let item of contentItems"
+      [content]="item"
+      size="medium"
+      (cardClick)="onItemClick($event)">
+    </app-content-card>
+  </div>
+
+  <!-- Featured Layout -->
+  <div class="content-section__featured" *ngIf="section.type === 'featured'">
+    <div class="content-section__featured-main">
+      <app-content-card
+        [content]="contentItems[0]"
+        size="large"
+        (cardClick)="onItemClick($event)"
+        *ngIf="contentItems.length > 0">
+      </app-content-card>
+    </div>
+    <div class="content-section__featured-sidebar" *ngIf="contentItems.length > 1">
+      <app-content-card
+        *ngFor="let item of contentItems.slice(1, 4)"
+        [content]="item"
+        size="small"
+        (cardClick)="onItemClick($event)"
+>
+      </app-content-card>
+    </div>
+  </div>
+</section>
+
+<!-- Loading State -->
+<div class="content-section__loading" *ngIf="isLoading">
+  <div class="content-section__loading-spinner"></div>
+  <p class="content-section__loading-text">Loading content...</p>
+</div>

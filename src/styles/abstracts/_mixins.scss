@@ -1,0 +1,207 @@
+// Media query mixins
+@mixin mobile {
+  @media (max-width: #{$breakpoint-sm - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$breakpoint-sm}) and (max-width: #{$breakpoint-md - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$breakpoint-md}) {
+    @content;
+  }
+}
+
+@mixin large-desktop {
+  @media (min-width: #{$breakpoint-lg}) {
+    @content;
+  }
+}
+
+// Flexbox mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+// Button mixins
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-md $spacing-lg;
+  border: none;
+  border-radius: $border-radius-md;
+  font-family: $font-family-primary;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all $transition-normal;
+  outline: none;
+  
+  &:focus {
+    outline: 2px solid $netflix-red;
+    outline-offset: 2px;
+  }
+}
+
+@mixin button-primary {
+  @include button-base;
+  background: $netflix-red;
+  color: $white;
+  
+  &:hover {
+    background: $netflix-red-hover;
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@mixin button-secondary {
+  @include button-base;
+  background: rgba(255, 255, 255, 0.2);
+  color: $white;
+  backdrop-filter: blur(10px);
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+  }
+}
+
+// Card mixins
+@mixin card-base {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: $border-radius-lg;
+  padding: $spacing-xl;
+  transition: all $transition-normal;
+}
+
+@mixin card-hover {
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-4px);
+    box-shadow: $shadow-netflix;
+  }
+}
+
+// Text mixins
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin text-multiline-truncate($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// Animation mixins
+@mixin fade-in($duration: 0.5s) {
+  opacity: 0;
+  animation: fadeIn $duration ease-out forwards;
+}
+
+@mixin slide-in-up($duration: 0.5s) {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideInUp $duration ease-out forwards;
+}
+
+@mixin scale-in($duration: 0.3s) {
+  opacity: 0;
+  transform: scale(0.8);
+  animation: scaleIn $duration ease-out forwards;
+}
+
+// Netflix-specific mixins
+@mixin netflix-gradient {
+  background: linear-gradient(
+    135deg,
+    $netflix-black 0%,
+    $netflix-black-light 25%,
+    $netflix-black 50%,
+    darken($netflix-black, 5%) 75%,
+    $netflix-black 100%
+  );
+}
+
+@mixin netflix-hero-overlay {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+}
+
+@mixin netflix-card-hover {
+  &:hover {
+    transform: scale(1.05);
+    z-index: 10;
+    box-shadow: $shadow-netflix;
+  }
+}
+
+// Responsive typography
+@mixin responsive-font-size($mobile-size, $desktop-size) {
+  font-size: $mobile-size;
+  
+  @include desktop {
+    font-size: $desktop-size;
+  }
+}
+
+// Container mixin
+@mixin container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 4%;
+  
+  @include mobile {
+    padding: 0 16px;
+  }
+}
+
+// Loading spinner mixin
+@mixin loading-spinner($size: 40px, $color: $netflix-red) {
+  width: $size;
+  height: $size;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid $color;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}

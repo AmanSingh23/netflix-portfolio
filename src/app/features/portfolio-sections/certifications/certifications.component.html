@@ -1,0 +1,27 @@
+<div class="certifications-container" [class.certifications-container--compact]="hideHeader">
+  <app-header *ngIf="!hideHeader"></app-header>
+  <main class="certifications-main" [class.certifications-main--compact]="hideHeader">
+    <div class="certifications-content">
+      <!-- Heading -->
+      <h1 class="certifications-heading">
+        Bridging the gap between robust Fullstack development and enterprise-grade security.
+      </h1>
+
+      <!-- Tab Navigation -->
+      <app-tab-navigation
+        [tabs]="tabs"
+        [activeTabId]="activeTabId"
+        (tabChange)="onTabChange($event)">
+      </app-tab-navigation>
+
+      <!-- Certifications Grid -->
+      <div class="certifications-grid">
+        <app-certification-card
+          *ngFor="let cert of filteredCertifications"
+          [certification]="cert"
+          (verify)="onVerify($event)">
+        </app-certification-card>
+      </div>
+    </div>
+  </main>
+</div>

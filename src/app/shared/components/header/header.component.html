@@ -1,0 +1,98 @@
+<header class="header" [class.header--scrolled]="isScrolled">
+  <div class="header__container">
+    <!-- Logo Section -->
+    <div class="header__logo">
+      <button 
+        class="header__logo-button"
+        (click)="navigateToDashboard()"
+        *ngIf="selectedProfile">
+        <span class="header__logo-text">AMAN SINGH</span>
+      </button>
+      <span class="header__logo-text" *ngIf="!selectedProfile">AMAN SINGH</span>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="header__nav" *ngIf="selectedProfile">
+      <ul class="header__nav-list">
+        <li class="header__nav-item">
+          <a routerLink="/dashboard" class="header__nav-link" routerLinkActive="active">Home</a>
+        </li>
+        <li class="header__nav-item">
+          <a routerLink="/professional" class="header__nav-link" routerLinkActive="active">Professional</a>
+        </li>
+        <li class="header__nav-item">
+          <a routerLink="/skills" class="header__nav-link" routerLinkActive="active">Skills</a>
+        </li>
+        <li class="header__nav-item">
+          <a routerLink="/projects" class="header__nav-link" routerLinkActive="active">Projects</a>
+        </li>
+        <li class="header__nav-item">
+          <a routerLink="/contact" class="header__nav-link" routerLinkActive="active">Hire Me</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Profile Selector -->
+    <div class="header__profile-selector" *ngIf="selectedProfile">
+      <div class="header__profile-dropdown-wrapper">
+        <button 
+          class="header__profile-button"
+          (click)="toggleProfileDropdown()"
+          [class.header__profile-button--active]="isProfileDropdownOpen">
+          <div class="header__profile-avatar" [style.background-color]="selectedProfile.color">
+            <img 
+              [src]="selectedProfile.avatar" 
+              [alt]="selectedProfile.name"
+              class="header__profile-image"
+              *ngIf="selectedProfile.avatar">
+            <span class="header__profile-initials" *ngIf="!selectedProfile.avatar">
+              {{ getProfileInitials() }}
+            </span>
+          </div>
+          <svg class="header__profile-chevron" [class.header__profile-chevron--open]="isProfileDropdownOpen" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        
+        <div class="header__profile-dropdown" [class.header__profile-dropdown--open]="isProfileDropdownOpen">
+          <div class="header__profile-dropdown-content">
+            <div class="header__profile-dropdown-title">Who's watching?</div>
+            <div class="header__profile-list">
+              <button 
+                *ngFor="let profile of profiles"
+                class="header__profile-item"
+                [class.header__profile-item--active]="profile.id === selectedProfile.id"
+                (click)="selectProfile(profile)">
+                <div class="header__profile-item-avatar" [style.background-color]="profile.color">
+                  <img 
+                    [src]="profile.avatar" 
+                    [alt]="profile.name"
+                    class="header__profile-item-image"
+                    *ngIf="profile.avatar">
+                  <span class="header__profile-item-initials" *ngIf="!profile.avatar">
+                    {{ getProfileInitialsForProfile(profile) }}
+                  </span>
+                </div>
+                <span class="header__profile-item-name">{{ profile.name }}</span>
+              </button>
+            </div>
+            <div class="header__profile-dropdown-divider"></div>
+            <button 
+              class="header__profile-manage"
+              (click)="navigateToProfileSelection()">
+              Manage Profiles
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back Button (for non-dashboard pages) -->
+    <div class="header__back" *ngIf="!selectedProfile">
+      <button class="header__back-button" (click)="goBack()">
+        <i class="icon-arrow-left"></i>
+        <span>Back</span>
+      </button>
+    </div>
+  </div>
+</header>

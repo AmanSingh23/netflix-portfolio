@@ -1,0 +1,160 @@
+<div class="content-detail-container">
+  <!-- Header -->
+  <app-header></app-header>
+
+  <!-- Main Content -->
+  <main class="content-detail-main" *ngIf="!isLoading && !error">
+    <!-- Hero Section -->
+    <section class="content-detail-hero" *ngIf="content">
+      <div class="content-detail-hero__background">
+        <img 
+          [src]="getImageUrl()" 
+          [alt]="content.title"
+          class="content-detail-hero__background-image">
+        <div class="content-detail-hero__background-overlay"></div>
+      </div>
+      
+      <div class="content-detail-hero__content">
+        <div class="content-detail-hero__container">
+          <div class="content-detail-hero__info">
+            <h1 class="content-detail-hero__title">{{ content.title }}</h1>
+            
+            <div class="content-detail-hero__meta">
+              <span class="content-detail-hero__rating" *ngIf="content.rating">
+                <i class="icon-star"></i>
+                {{ content.rating }}
+              </span>
+              <span class="content-detail-hero__year" *ngIf="content.year">
+                {{ content.year }}
+              </span>
+              <span class="content-detail-hero__duration" *ngIf="content.duration">
+                {{ content.duration }}
+              </span>
+            </div>
+            
+            <p class="content-detail-hero__description">{{ content.description }}</p>
+            
+            <div class="content-detail-hero__tags" *ngIf="content.tags.length">
+              <span 
+                class="content-detail-hero__tag"
+                *ngFor="let tag of content.tags">
+                {{ tag }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Details Section -->
+    <section class="content-detail-details" *ngIf="content?.details">
+      <div class="content-detail-details__container">
+        <div class="content-detail-details__content">
+          <!-- Overview -->
+          <div class="content-detail-details__section" *ngIf="content?.details?.overview">
+            <h2 class="content-detail-details__section-title">Overview</h2>
+            <p class="content-detail-details__section-text">{{ content?.details?.overview }}</p>
+          </div>
+
+          <!-- Skills -->
+          <div class="content-detail-details__section" *ngIf="content?.details?.skills?.length">
+            <h2 class="content-detail-details__section-title">Skills</h2>
+            <div class="content-detail-details__tags">
+              <span 
+                class="content-detail-details__tag"
+                *ngFor="let skill of content?.details?.skills">
+                {{ skill }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Technologies -->
+          <div class="content-detail-details__section" *ngIf="content?.details?.technologies?.length">
+            <h2 class="content-detail-details__section-title">Technologies</h2>
+            <div class="content-detail-details__tags">
+              <span 
+                class="content-detail-details__tag"
+                *ngFor="let tech of content?.details?.technologies">
+                {{ tech }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Achievements -->
+          <div class="content-detail-details__section" *ngIf="content?.details?.achievements?.length">
+            <h2 class="content-detail-details__section-title">Achievements</h2>
+            <ul class="content-detail-details__list">
+              <li 
+                class="content-detail-details__list-item"
+                *ngFor="let achievement of content?.details?.achievements">
+                {{ achievement }}
+              </li>
+            </ul>
+          </div>
+
+          <!-- Links -->
+          <div class="content-detail-details__section" *ngIf="content?.details?.links?.length">
+            <h2 class="content-detail-details__section-title">Links</h2>
+            <div class="content-detail-details__links">
+              <a 
+                *ngFor="let link of content?.details?.links"
+                [href]="link.url"
+                class="content-detail-details__link"
+                target="_blank"
+                rel="noopener noreferrer">
+                <i [class]="'icon-' + link.type"></i>
+                <span>{{ link.label }}</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Testimonials -->
+          <div class="content-detail-details__section" *ngIf="content?.details?.testimonials?.length">
+            <h2 class="content-detail-details__section-title">Testimonials</h2>
+            <div class="content-detail-details__testimonials">
+              <div 
+                class="content-detail-details__testimonial"
+                *ngFor="let testimonial of content?.details?.testimonials">
+                <div class="content-detail-details__testimonial-content">
+                  <p class="content-detail-details__testimonial-text">"{{ testimonial.text }}"</p>
+                  <div class="content-detail-details__testimonial-author">
+                    <span class="content-detail-details__testimonial-name">{{ testimonial.author }}</span>
+                    <span class="content-detail-details__testimonial-role">{{ testimonial.role }}, {{ testimonial.company }}</span>
+                  </div>
+                </div>
+                <div class="content-detail-details__testimonial-rating">
+                  <span 
+                    class="content-detail-details__testimonial-star"
+                    *ngFor="let star of [1,2,3,4,5]"
+                    [class.content-detail-details__testimonial-star--active]="star <= testimonial.rating">
+                    <i class="icon-star"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Loading State -->
+  <div class="content-detail-loading" *ngIf="isLoading">
+    <div class="content-detail-loading__spinner"></div>
+    <p class="content-detail-loading__text">Loading content...</p>
+  </div>
+
+  <!-- Error State -->
+  <div class="content-detail-error" *ngIf="error">
+    <div class="content-detail-error__container">
+      <h2 class="content-detail-error__title">Oops!</h2>
+      <p class="content-detail-error__message">{{ error }}</p>
+      <button 
+        class="content-detail-error__button"
+        (click)="goBack()">
+        <i class="icon-arrow-left"></i>
+        <span>Go Back</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+// App component styles
+app-root {
+  display: block;
+  min-height: 100vh;
+  background-color: #141414;
+  color: #ffffff;
+  font-family: 'Netflix Sans', Arial, sans-serif;
+}
+
+// Global styles for the entire application
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #141414;
+  color: #ffffff;
+  font-family: 'Netflix Sans', Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+// Smooth scrolling
+html {
+  scroll-behavior: smooth;
+}
+
+// Custom scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #141414;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
