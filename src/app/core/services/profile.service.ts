@@ -7,7 +7,9 @@ import { Profile, ProfileSelectionState } from '../models/profile.model';
 })
 export class ProfileService {
   private readonly STORAGE_KEY = 'netflix-portfolio-selected-profile';
-  
+  /** Only restore saved profile when this flag is set (user has completed profile selection at least once). First load = no flag = always go to profile-selection. */
+  private readonly HAS_SELECTED_PROFILE_KEY = 'netflix-portfolio-has-selected-profile';
+
   private profilesSubject = new BehaviorSubject<Profile[]>([
     {
       id: 'Recruiter',
@@ -69,6 +71,7 @@ export class ProfileService {
   clearSelectedProfile(): void {
     this.selectedProfileSubject.next(null);
     localStorage.removeItem(this.STORAGE_KEY);
+    localStorage.removeItem(this.HAS_SELECTED_PROFILE_KEY);
   }
 
   isProfileSelected(): boolean {
@@ -76,6 +79,10 @@ export class ProfileService {
   }
 
   private loadSelectedProfile(): void {
+    const hasSelectedBefore = localStorage.getItem(this.HAS_SELECTED_PROFILE_KEY);
+    if (hasSelectedBefore !== 'true') {
+      return;
+    }
     const savedProfile = localStorage.getItem(this.STORAGE_KEY);
     if (savedProfile) {
       try {
@@ -84,12 +91,14 @@ export class ProfileService {
       } catch (error) {
         console.error('Error loading saved profile:', error);
         localStorage.removeItem(this.STORAGE_KEY);
+        localStorage.removeItem(this.HAS_SELECTED_PROFILE_KEY);
       }
     }
   }
 
   private saveSelectedProfile(profile: Profile): void {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(profile));
+    localStorage.setItem(this.HAS_SELECTED_PROFILE_KEY, 'true');
   }
 
   getProfileState(): ProfileSelectionState {

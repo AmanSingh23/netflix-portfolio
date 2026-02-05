@@ -40,10 +40,10 @@ export class ProfileSelectionComponent implements OnInit, OnDestroy {
       });
   }
 
+  /** On first visit, no profile is restored (see ProfileService); user always lands here. Selecting a profile saves it and sets the "has selected" flag so future visits can restore it. */
   selectProfile(profile: Profile): void {
     this.selectedProfile = profile;
-    
-    // Add selection animation delay
+
     setTimeout(() => {
       this.profileService.selectProfile(profile);
       this.router.navigate(['/dashboard']);
