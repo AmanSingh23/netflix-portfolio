@@ -36,6 +36,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/netflix-portfolio/",
               "budgets": [
                 {
                   "type": "initial",
